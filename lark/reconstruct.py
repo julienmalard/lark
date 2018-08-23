@@ -156,7 +156,9 @@ class Reconstructor:
             else:
                 yield item
 
-    def reconstruct(self, tree):
+    def reconstruct(self, tree, postproc=None):
         # TODO: ambiguity?
-        return ''.join(self._reconstruct(tree))
-
+        if postproc is None:
+            return ''.join(self._reconstruct(tree))
+        else:
+            return ''.join(postproc(self._reconstruct(tree)))
